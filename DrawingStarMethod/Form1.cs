@@ -29,15 +29,23 @@ namespace DrawingStarMethod
         {
             Graphics formGraphics = this.CreateGraphics();
             Pen drawPen = new Pen(Color.Black);
+            float[] drawStar = new float[10];
 
             float xValue, yValue, size;
 
-            xValue = Convert.ToSingle(xInput.Text);
-            yValue = Convert.ToSingle(yInput.Text);
-            size = Convert.ToSingle(sizeInput.Text);
+            try
+            {
+                xValue = Convert.ToSingle(xInput.Text);
+                yValue = Convert.ToSingle(yInput.Text);
+                size = Convert.ToSingle(sizeInput.Text);
+                
 
-            formGraphics.Clear(Color.DarkKhaki);
-            DrawStar(drawPen, xValue, yValue, size);
+                formGraphics.Clear(Color.DarkKhaki);
+                DrawStar(drawPen, xValue, yValue, size);
+
+            }
+            catch
+            { }
         }
 
         /// <summary>
@@ -99,8 +107,25 @@ namespace DrawingStarMethod
         /// <param name="pixels">Side lengths of the square within which the star is drawn</param>
         public void FillStar(SolidBrush drawBrush, float x, float y, float pixels)
         {
-            // TODO create FillStar code here similar to DrawStar code but using FillPolygon instead
+            Graphics formGraphics = this.CreateGraphics();
+            Pen drawPen = new Pen(Color.Black);
+            float scale = pixels / 207;
 
+            // TODO create FillStar code here similar to DrawStar code but using FillPolygon instead
+            PointF point1 = new PointF(80 * scale + x, 77 * scale + y);
+            PointF point2 = new PointF(103 * scale + x, 4 * scale + y);
+            PointF point3 = new PointF(126 * scale + x, 78 * scale + y);
+            PointF point4 = new PointF(207 * scale + x, 78 * scale + y);
+            PointF point5 = new PointF(143 * scale + x, 125 * scale + y);
+            PointF point6 = new PointF(167 * scale + x, 197 * scale + y);
+            PointF point7 = new PointF(103 * scale + x, 152 * scale + y);
+            PointF point8 = new PointF(40 * scale + x, 196 * scale + y);
+            PointF point9 = new PointF(63 * scale + x, 123 * scale + y);
+            PointF point10 = new PointF(0 * scale + x, 77 * scale + y);
+
+            PointF[] drawStar = { point1, point2, point3, point4, point5, point6, point7, point8, point9, point10};
+            formGraphics.FillPolygon(drawBrush, drawStar);
+           
         }
     }
 }
